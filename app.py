@@ -1,6 +1,10 @@
 import streamlit as st
 import streamlit_authenticator as stauth
+from streamlit_option_menu import option_menu
 from services.users import fetchUsers, insertUser
+from ui.articles import articles_index
+from ui.categories import categories_index
+from ui.groups import groups_index
 
 users=fetchUsers()
 
@@ -24,16 +28,16 @@ if users:
     else :
         auth.logout("Logout","sidebar")
         st.sidebar.subheader("مرحبا بك " + st.session_state.name)
-        st.title("الرئيسية")
-        st.markdown(
-            """
-            <style>
-             direction: rtl;
-                background-color: coral;
-         </style>
-            """,
-            unsafe_allow_html=True,
-        )
+        with st.sidebar.container():
+            main_menu=option_menu("",["الرئيسية","المجموعات","الاصناف","العناصر"])
+        if main_menu == "الرئيسية":
+            st.title("الرئيسية")
+        elif main_menu == "المجموعات":
+            groups_index()
+        elif main_menu == "الاصناف":
+            categories_index()
+        elif main_menu == "العناصر":
+            articles_index()
 else:
     with st.form("register_form",clear_on_submit=True):
         name=st.text_input("الاسم")
