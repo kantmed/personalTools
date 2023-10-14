@@ -5,7 +5,7 @@ from database.models import Base,User
 BASE_DIR = os.path.dirname(os.path.relpath(__file__))
 print(BASE_DIR)
 
-connect_args = f"sqlite:///"+os.path.join(BASE_DIR, "personal-tools.db")
+connect_args = f"sqlite:///"+os.path.join(BASE_DIR, "personal-tools.sqlite")
 
 
 engine = create_engine(connect_args)

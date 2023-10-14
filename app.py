@@ -5,6 +5,7 @@ from services.users import fetchUsers, insertUser
 from ui.articles import articles_index
 from ui.categories import categories_index
 from ui.groups import groups_index
+from ui.operations import operation_index
 
 users=fetchUsers()
 
@@ -29,7 +30,7 @@ if users:
         auth.logout("Logout","sidebar")
         st.sidebar.subheader("مرحبا بك " + st.session_state.name)
         with st.sidebar.container():
-            main_menu=option_menu("",["الرئيسية","المجموعات","الاصناف","العناصر"])
+            main_menu=option_menu("",["الرئيسية","المجموعات","الاصناف","العناصر","العمليات"])
         if main_menu == "الرئيسية":
             st.title("الرئيسية")
         elif main_menu == "المجموعات":
@@ -38,6 +39,8 @@ if users:
             categories_index()
         elif main_menu == "العناصر":
             articles_index()
+        elif main_menu =="العمليات":
+            operation_index()
 else:
     with st.form("register_form",clear_on_submit=True):
         name=st.text_input("الاسم")

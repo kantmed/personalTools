@@ -1,12 +1,18 @@
 import streamlit as st
 
+
 from services.articles import fetchArticles, insertArticle
 from services.categories import fetchCategories
+from services.helpers import formatNumber
 
 
 def articles_index():
     st.title("العناصر")
-    categories=[{"الصنف":article.category.title,"التعيين":article.title} for article in fetchArticles()]
+    categories=[{"الصنف":article.category.title,
+                 "التعيين":article.title,
+                 "المدين":formatNumber(article.debit()),
+                 "الدائن":formatNumber(article.credit()),
+                 "الرصيد":formatNumber(article.balance())} for article in fetchArticles()]
     st.table(categories)
     articles_form(article=None)
 
