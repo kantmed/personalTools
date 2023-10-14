@@ -2,4 +2,3 @@ sqlalchemy
 streamlit
 streamlit_authenticator
 streamlit_option_menu
-locale
